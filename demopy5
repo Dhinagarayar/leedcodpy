@@ -1,0 +1,144 @@
+"""class Solution:
+    def containsDuplicate(self, nums: list[int]) -> bool:
+        seen = set()
+        for n in nums:
+            if n in seen:
+                return True
+            seen.add(n)
+        return False
+
+def contain(n,k):
+    number=list(range(1,n+1))
+    combo=combination(number,k)
+
+class Solution:
+    def combine(self, n: int, k: int) -> list[list[int]]:
+        res = []
+
+        def backtrack(start, path):
+            if len(path) == k:
+                res.append(list(path))
+                return
+            for i in range(start, n + 1):
+                # 1. Number-ah choose pannu
+                path.append(i)
+                backtrack(i + 1, path)
+                path.pop()
+
+        backtrack(1, [])
+        return res
+    
+from itertools import combinations
+
+n, k = 4, 2
+print(list(combinations(range(1, n + 1), k)))
+
+def find_single_number():
+    # 1. Get input
+    user_input = input("Enter numbers (each twice, except one): ")
+    try:
+        nums = list(map(int, user_input.split()))
+    except ValueError:
+        print("Please enter valid integers.")
+        return
+
+    # 2. Apply XOR Logic
+    single = 0
+    for n in nums:
+        single ^= n
+    
+    # 3. Output
+    print(f"The number that appears only once is: {single}")
+
+find_single_number()
+
+def check_power_of_four():
+    try:
+        n = int(input("Enter a number: "))
+    except ValueError:
+        print("Invalid input.")
+        return
+
+    if n <= 0:
+        print(f"{n} is not a power of four.")
+        return
+
+    original_n = n
+    while n % 4 == 0:
+        n //= 4
+    
+    if n == 1:
+        print(f"{original_n} is a power of four!")
+    else:
+        print(f"{original_n} is NOT a power of four.")
+
+check_power_of_four()
+
+n = int(input("Enter a number: "))
+while n>0 and n%4==0:
+    n//=4
+print(n==1)
+
+def calculate_stock_profit():
+    user_input = input("Enter stock prices separated by spaces: ")
+    try:
+        prices = list(map(int, user_input.split()))
+    except ValueError:
+        print("Please enter valid numbers.")
+        return
+
+    if not prices:
+        print("Profit: 0")
+        return
+
+    min_price = float('inf')
+    max_profit = 0
+
+    for price in prices:
+        min_price = min(min_price, price)
+        profit = price - min_price
+        max_profit = max(max_profit, profit)
+
+    print(f"Maximum possible profit: {max_profit}")
+
+calculate_stock_profit()
+calculate_stock_profit()
+
+class student:
+    def details(self,name,marks):
+
+        if mark>40:
+            
+            result="pass"
+            print(result)
+s1=studemt()
+s2=student()
+
+class Student:
+    def __init__(self, name, marks):
+        self.name = name
+        self.marks = marks 
+    def show_result(self):
+        if self.marks >= 40: 
+            result = "Pass"
+        else:
+            result = "Fail"
+        print("\nStudent Name :", self.name)
+        print("Marks        :", self.marks)
+        print("Result       :", result)
+name = input("Enter name: ")
+marks = int(input("Enter marks: ")) 
+s1 = Student(name, marks)
+s1.show_result()"""
+
+class TemperatureConverter:
+    def __init__(self, celsius):
+        self.celsius = celsius
+
+    def to_fahrenheit(self):
+        fahrenheit = (self.celsius * 9/5) + 32
+        return fahrenheit
+temp_in_c = float(input("Enter temperature in Celsius: "))
+converter = TemperatureConverter(temp_in_c)
+result = converter.to_fahrenheit()
+print(f"{temp_in_c}°C is equal to {result}°F")
