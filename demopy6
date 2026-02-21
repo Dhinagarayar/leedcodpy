@@ -1,0 +1,133 @@
+# eg atm
+#advantage
+"""pin = 5555
+name = input("Enter name: ")
+balance = int(input("Enter operating balance: "))
+user_pin = int(input("Enter your user_pin: "))
+
+class BankAccount:
+    def __init__(self, name, balance):
+        self.name = name
+        self.__balance = balance 
+
+    def deposit(self, amount):
+        self.__balance += amount
+        print(f"Successfully deposited:", amount)
+
+    def withdraw(self, amount):
+        if amount <= self.__balance:
+            self.__balance -= amount
+            return True
+        return False
+    #abstractmethod
+    def show_balance(self):
+        return self.__balance
+
+class SavingsAcc(BankAccount):
+    def withdraw(self, amount):
+        if amount <= self.show_balance():
+            super().withdraw(amount)
+            print("Withdraw SavingsAcc successful.",amount)
+        else:
+            print("Insufficient balance in Savings!")
+
+class CurrentAcc(BankAccount):
+    def withdraw(self, amount):
+        if amount <= self.show_balance():
+            super().withdraw(amount)
+            print("Withdraw SavingsAcc successful.",amount)
+        else:
+            print("Insufficient balance in Current!")
+
+if pin == user_pin:
+    print("\nAccount Types: 1. Savings  2. Current")
+    acc_type = int(input("Choose account type: "))
+    
+    if acc_type == 1:
+        s = SavingsAcc(name, balance)
+    else:
+        s = CurrentAcc(name, balance)
+
+    while True: 
+        print("\n1. Deposit  2. Withdraw  3. Balance  4. Exit")
+        choice = int(input("Enter the choice: "))
+
+        if choice == 1:
+            amt = int(input("Enter the deposit amount: "))
+            s.deposit(amt)
+        elif choice == 2:
+            amt_w = int(input("Enter the withdraw Amount: "))
+            s.withdraw(amt_w)
+        elif choice == 3:
+            print("Current Balance: ", s.show_balance())
+        elif choice == 4:
+            print("Exiting... Thank you!")
+            break
+        else:
+            print("Invalid choice!")
+else:
+    print("Your user_pin is invalid!")"""
+
+
+"""#polymorphism
+
+#many - forms
+#bulid in function 
+print(len("hello"))
+print(len([1,3,4,8]))
+
+#operater poly
+print(5+9)
+print("5"+"8")
+
+def add(a,b):
+    return a+b
+print(add(5,8))
+print(add("hello","word"))
+
+
+class Animal:
+    def sound(self):
+        print("Animal make sound")
+
+class Dog(Animal):
+    def sound(self):
+        print("Dog barks")
+
+class Cat(Animal):
+    def sound(self):
+        print("cat meows")
+
+d=Dog()
+c=Cat()
+
+d.sound()
+c.sound()"""
+
+#encapsulation
+#polymorphism
+#inheritance
+#abstract method
+from abc import ABC,abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class square(Shape):
+    def __init__(self,side):
+        self.side=side
+    def area(self):
+        return self.area*self.area
+     
+class circle(Shape):
+    def __init__(self,radius):
+        self.radius= r
+    def area(self):
+        3.14* self.area*self.area
+
+square=square(2)
+circle=circle(4)
+print(square.area())
+print(circle.area())
