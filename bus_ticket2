@@ -1,0 +1,130 @@
+from abc import ABC, abstractmethod
+
+# STEP 1 & 2: Abstract class Vehicle
+class Vehicle(ABC):
+    def __init__(self, number, total_seats):
+        self.number = number
+        self.total_seats = total_seats
+
+    # STEP 3: Abstract method for Polymorphism
+    @abstractmethod
+    def calculate_fare(self):
+        pass
+
+    # STEP 4: Common method
+    def show_details(self):
+        print(f"Bus No: {self.number} | Total Capacity: {self.total_seats}")
+
+# STEP 5 & 6: LuxuryBus implementation
+class LuxuryBus(Vehicle):
+    def calculate_fare(self):
+        return 500  # Premium Fare
+
+# STEP 7 & 8: OrdinaryBus implementation
+class OrdinaryBus(Vehicle):
+    def calculate_fare(self):
+        return 200  # Standard Fare
+
+# STEP 9: SeatManager with Encapsulation
+class SeatManager:
+    def __init__(self, total_seats):
+        self.__total_seats = total_seats  # Private variable
+        self.__booked_seats = []          # Private list
+
+    # STEP 10: Booking Logic
+    def book_seat(self):
+        if len(self.__booked_seats) < self.__total_seats:
+            seat_no = len(self.__booked_seats) + 1
+            self.__booked_seats.append(seat_no)
+            return seat_no
+        return None
+
+    # STEP 11: Cancellation Logic
+    def cancel_seat(self, seat_no):
+        if seat_no in self.__booked_seats:
+            self.__booked_seats.remove(seat_no)
+            return True
+        return False
+
+    # STEP 12: Availability Logic
+    def available_seats(self):
+        return self.__total_seats - len(self.__booked_seats)
+
+# STEP 13: Passenger Class
+class Passenger:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+# STEP 14 & 15: Ticket Class
+class Ticket:
+    def __init__(self, passenger, bus, seat_no, fare):
+        self.passenger = passenger
+        self.bus = bus
+        self.seat_no = seat_no
+        self.fare = fare
+
+    def show_ticket(self):
+        print("-" * 30)
+        print(f"TICKET CONFIRMED")
+        print(f"Passenger: {self.passenger.name} ({self.passenger.age})")
+        print(f"Bus: {self.bus.number} | Seat: {self.seat_no}")
+        print(f"Fare Paid: ₹{self.fare}")
+        print("-" * 30)
+
+# --- MAIN PROGRAM EXECUTION ---
+
+# STEP 16 & 17: Bus Selection
+print("Welcome to the Bus Booking System")
+choice = input("Select Bus Type (1: Luxury, 2: Ordinary): ")
+
+if choice == '1':
+    my_bus = LuxuryBus("LX-101", 5)
+else:
+    my_bus = OrdinaryBus("ORD-202", 5)
+
+# STEP 18 & 19: Initialize Managers
+sm = SeatManager(my_bus.total_seats)
+tickets_list = []
+
+# STEP 20: Menu Loop
+while True:
+    print(f"\n--- MENU ({my_bus.number}) ---")
+    print("1. Available Seats\n2. Book Seat\n3. Cancel Seat\n4. Show All Tickets\n5. Exit")
+    op = input("Enter option: ")
+
+    if op == '1': # STEP 21
+        print(f"Seats Remaining: {sm.available_seats()}")
+
+    elif op == '2': # STEP 22
+        name = input("Enter Name: ")
+        age = input("Enter Age: ")
+        
+        seat = sm.book_seat()
+        if seat:
+            p = Passenger(name, age)
+            fare = my_bus.calculate_fare() # Polymorphism in action
+            new_ticket = Ticket(p, my_bus, seat, fare)
+            tickets_list.append(new_ticket)
+            new_ticket.show_ticket()
+        else:
+            print("Error: Bus is Full!")
+
+    elif op == '3': # STEP 23
+        s_no = int(input("Enter seat number to cancel: "))
+        if sm.cancel_seat(s_no):
+            print(f"Seat {s_no} cancelled successfully.")
+            # Remove ticket from list
+            tickets_list = [t for t in tickets_list if t.seat_no != s_no]
+        else:
+            print("Invalid Seat Number.")
+
+    elif op == '4': # STEP 24
+        if not tickets_list:
+            print("No tickets booked yet.")
+        for t in tickets_list:
+            t.show_ticket()
+
+    elif op == '5': # STEP 25
+        print("Thank you for using our system!")
+        break

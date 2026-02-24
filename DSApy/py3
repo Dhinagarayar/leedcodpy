@@ -1,0 +1,234 @@
+#stack
+#code
+# stack=[]
+# while True:
+#     print("\n 1.push 2.pop 3.peek 4.Display 5.exit")
+#     choice=int(input("Enter choice"))
+#     if choice==1:
+#         val=int(input("Enter the value"))
+#         stack.append(val)
+#         print("pushed",val)
+#     elif choice==2:
+#         if not stack:
+#             print("Empty stack")
+#         else:
+#             print("pooped",stack.pop())
+#     elif choice==3:
+#         if not stack:
+#             print("stack empty")
+#         else:
+#             print("top")
+#     elif choice==4:
+#         print("stack",stack)
+#     else:
+#         print("Invalid choice")
+
+
+#queue operation
+#enqueue-add an item in rear
+#dequeue-remove an item from front
+#front/peek
+#isEmpty
+#size
+# queue=[]
+# while True:
+#     print("\n 1.push 2.pop 3.peek 4.Display 5.exit")
+#     choice=int(input("Enter choice"))
+#     if choice==1:
+#         val=int(input("Enter the value"))
+#         queue.append(val)
+#         print("added",val)
+#     elif choice==2:
+#         if not queue:
+#             print(" Queue Empty")
+#         else:
+#             print("Removed",queue.pop())
+#     elif choice==3:
+#         if not queue:
+#             print("Queue Empty")
+#         else:
+#             print("front:",queue[0])
+#     elif choice==4:
+#         print("queue",queue)
+#     else:
+#         print("Invalid choice")
+
+# from abc import ABC, abstractmethod
+
+# # Abstract Class
+# class Pizza(ABC):
+
+#     @abstractmethod
+#     def get_base_price(self):
+#         pass
+
+#     @abstractmethod
+#     def calculate_bill(self):
+#         pass
+
+
+# # Concrete Class
+# class PizzaBill(Pizza):
+
+#     def __init__(self):
+#         self.base_price = 0
+#         self.total = 0
+
+#     def get_base_price(self):
+#         print("Pizza Categories")
+#         print("1. Normal")
+#         print("2. Deluxe")
+#         choice = int(input("Enter your Choice [1 or 2]: "))
+
+#         if choice == 1:
+#             self.base_price = 400
+#         elif choice == 2:
+#             self.base_price = 600
+
+#         self.total += self.base_price
+
+#     def calculate_bill(self):
+
+#         print("\nPizza Types")
+#         print("1. Veg")
+#         print("2. Non Veg")
+#         input("Enter your Choice [1 or 2]: ")
+
+#         # Extra Cheese
+#         cheese = int(input("Enter Cheese? [1.Yes or 2.NO]: "))
+#         if cheese == 1:
+#             self.total += 100
+
+#         # Extra Toppings
+#         topping = int(input("Enter Topping? [1.Yes or 2.NO]: "))
+#         if topping == 1:
+#             self.total += 100
+
+#         # Water Bottle
+#         water = int(input("Do you want Water Bottles? [1.Yes or 2.NO]: "))
+#         if water == 1:
+#             bottles = int(input("How many bottles?: "))
+#             self.total += bottles * 20
+
+#         # Ketchup
+#         ketchup = int(input("Do you want Ketchup? [1.Yes or 2.NO]: "))
+#         if ketchup == 1:
+#             packets = int(input("How many Packets?: "))
+#             self.total += packets * 5
+
+#         # Soft Drinks
+#         drinks = int(input("Do you want Soft Drinks? [1.Yes or 2.NO]: "))
+#         if drinks == 1:
+#             cans = int(input("How many Cans?: "))
+#             self.total += cans * 75
+
+#         # Take Away
+#         takeaway = int(input("Is it a Take Away? [1.Yes or 2.NO]: "))
+#         if takeaway == 1:
+#             self.total += 20
+
+#         # GST 18%
+#         gst = self.total * 0.18
+#         net_amount = self.total + gst
+
+#         # Bill Display
+#         print("\n-------------------------------")
+#         print("** Pizza Bill Generator **")
+#         print("-------------------------------")
+#         print("Base Price =", self.base_price)
+#         print("Total Cost =", self.total)
+#         print("GST Charges =", round(gst, 2))
+#         print("-------------------------------")
+#         print("Net Amount Payable =", round(net_amount, 2))
+
+
+# # Main Program
+# obj = PizzaBill()
+# obj.get_base_price()
+# obj.calculate_bill()
+
+#if front is free ,near can resue it
+
+
+# | Type           | Insert      | Delete      | Special Feature       |
+# | -------------- | ----------- | ----------- | --------------------- |
+# | Simple Queue   | Rear        | Front       | FIFO                  |
+# | Circular Queue | Rear        | Front       | Reuses space          |
+# | Priority Queue | By priority | By priority | Important items first |
+# | Deque          | Both ends   | Both ends   | Flexible              |
+        
+
+
+size = 5
+queue = [None] * size
+front = -1
+rear = -1
+
+def enqueue(value):
+    global front, rear
+    
+    if (rear + 1) % size == front:
+        print("Queue Full")
+        return
+    
+    if front == -1:
+        front = 0
+    
+    rear = (rear + 1) % size
+    queue[rear] = value
+    print(value, "inserted")
+
+def dequeue():
+    global front, rear
+    
+    if front == -1:
+        print("Queue Empty")
+        return
+    
+    removed = queue[front]
+    
+    if front == rear:
+        front = rear = -1
+    else:
+        front = (front + 1) % size
+    
+    print(removed, "removed")
+
+def display():
+    if front == -1:
+        print("Queue Empty")
+        return
+    
+    i = front
+    print("Queue elements:")
+    
+    while True:
+        print(queue[i], end=" ")
+        if i == rear:
+            break
+        i = (i + 1) % size
+    print()
+
+while True:
+    print("\n1.Enqueue")
+    print("2.Dequeue")
+    print("3.Display")
+    print("4.Exit")
+
+    choice = int(input("Enter choice: "))
+
+    if choice == 1:
+        value = int(input("Enter value: "))
+        enqueue(value)
+
+    elif choice == 2:
+        dequeue()
+
+    elif choice == 3:
+        display()
+
+    elif choice == 4:
+        break
+
+    else:
+        print("Invalid choice")

@@ -1,0 +1,112 @@
+from abc import ABC, abstractmethod
+class pizza(ABC):
+    def __init__(self,type,choice,price,add_on):
+        self.type=type
+        self.choice=choice
+        self.price=price
+        self.add_on=add_on
+
+
+class normal(pizza):
+    def __init__(self,choice):
+        self.choice=choice
+    def veg(self):
+        price=300
+        return price
+    def non_veg(self):
+        price=400
+        return price
+class Delux(pizza):
+    def __init__(self,choice):
+        self.choice=choice
+    def veg(self):
+        price=600
+        return price
+    def Non_veg(self):
+        price=800
+        return price
+
+
+print("1.Normal \n2.Delux")
+Pizza=int(input("enter your choice:"))
+if Pizza==1:
+    print("\n1.Veg 2.Non-veg")
+    choice=int(input("enter your choice(veg or non-veg):"))
+    if choice==1:
+        price=300
+        print(f"Rs.{price}")
+    elif choice==2:
+        price=400
+        print(f"Rs.{price}")
+elif Pizza==2:
+    print("\n1.Veg 2.Non-veg")
+    choice=int(input("enter your choice(veg or non-veg):"))
+    if choice==1:
+        prize=600
+        print(f"Rs.{price}")
+    elif choice==2:
+        price=800
+        print(f"Rs.{price}")  
+while True: 
+    print("\n1.Add-ons  2.Move to Bill")
+    ch=int(input("enter the option:"))
+    if ch==1:
+        ls=[]
+        bill=[]
+        while True:
+            print("\n1.cheese 2.Extra Toppings 3.Take away 4.Water battle 5.ketchep 6.Soft drinks 7.exit")
+            chr=int(input("enter the option:"))
+            ls.append(chr)
+            if chr==1:
+                print("adding extra cheese Rs.100")
+                ec=100
+                bill.append(ec)
+            elif chr==2:
+                print("Adding extra Toppings Rs.100")
+                et=100
+                bill.append(et)
+            elif chr==3:
+                print("Take away Bag charges:Rs.20")
+                eb=20
+                bill.append(eb)
+            elif chr==4:
+                print("Add Water bottle:Rs.20")
+                ew=20
+                bill.append(ew)
+            elif chr==5:
+                print("Add Ketchep")
+                ek=5
+                bill.append(ek)
+            elif chr==6:
+                print("Softdrinks:Rs.75")
+                es=75
+                bill.append(es)
+            elif chr==7:
+                break
+
+    elif ch==2:
+            print("Thanks for your order")
+            break
+print("-------Pizza Bill Generator----------")
+print(f"Base Price:{price}")
+for i in ls:
+    if i==1:
+        print("cheese:",ec)
+    elif i==2:
+        print("Extra Toppins:",et)
+    elif i==3:
+        print("Take away charges:",eb)
+    elif i==4:
+        print("Water Bottle:",ew)
+    elif i==5:
+        print("Ketchep:",ek)
+    elif i==6:
+        print("Softdrinks:",es)
+print("--------------------------------")
+Total=sum(bill)+price
+gst=(Total/100)*18
+print("Total cost:",Total)
+print("GST 18%:",gst)
+print("-------------------------------")
+bill_value=Total+gst
+print("Total:",bill_value)
